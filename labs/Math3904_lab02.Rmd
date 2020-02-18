@@ -1,0 +1,288 @@
+---
+title: "Lab 2"
+author: "Jonathan Eng"
+output: pdf_document
+date: "11:59PM February 17, 2020"
+---
+
+## More Basic R Skills
+
+
+* Calculate the average of 1000 realizations of Bernoullis with p = 0.9 in one line using `rbinom`.
+
+```{r}
+mean(rbinom(1000, size = 1, prob = 0.9))
+```
+
+* In class we considered a variable `x_3` which measured "criminality". We imagined L = 4 levels "none", "infraction", "misdimeanor" and "felony". Create a variable `x3` here with 100 random elements (equally probable). Create it as a nominal (i.e. unordered) factor.
+
+```{r}
+x3 = factor(sample(c("none", "infraction", "misdimeanor", "felony"), size = 100, replace = TRUE))
+x3
+```
+
+* Convert this variable into three binary variables without any information loss and put them into a data matrix.
+
+```{r}
+X = matrix(NA, nrow = length(x3), ncol = 3)
+X[ ,1] = as.numeric(x3 == "infraction")
+X[ ,2] = as.numeric(x3 == "misdimeanor")
+X[ ,3] = as.numeric(x3 == "felony")
+colnames(X) = c("is_infraction", "is_misdimeanor", "is_felony")
+X
+table(X)
+```
+
+* What should the sum of each row be (in English)? 
+
+It should be either 1 or 0 because categories are mutually exclusive. We can only put an object into 1 category. None = 0
+
+Verify that. 
+
+
+```{r}
+rowSums(X)
+table(rowSums(X))
+```
+
+* How should the column sum look (in English)? 
+
+The sums should be around the expectation, 25 since they are uniformly distributed.
+
+Verify that.
+
+
+```{r}
+colSums(X)
+```
+
+* Generate a matrix with 100 rows where the first column is realization from a normal with mean 17 and variance 38, the second column is uniform between -10 and 10, the third column is poisson with mean 6, the fourth column in exponential with lambda of 9, the fifth column is binomial with n = 20 and p = 0.12 and the sixth column is a binary variable with exactly 24% 1's dispersed randomly. Name the rows the entries of the `fake_first_names` vector.
+
+
+```{r}
+n = 100
+X = matrix(data = NA, nrow = n, ncol = 6)
+X[, 1] = rnorm(n, mean = 17, sd = sqrt(38))
+X[, 2] = runif(n, min = -10, max = 10)
+X[, 3] = rpois(n, lambda = 6)
+X[, 4] = rexp(n, rate = 9)
+X[, 5] = rbinom(n, size = 20, prob = 0.12)
+X[, 6] = sample(c(rep(1, n*.24), rep(0, n*.76)))
+
+fake_first_names = c(
+  "Sophia", "Emma", "Olivia", "Ava", "Mia", "Isabella", "Riley", 
+  "Aria", "Zoe", "Charlotte", "Lily", "Layla", "Amelia", "Emily", 
+  "Madelyn", "Aubrey", "Adalyn", "Madison", "Chloe", "Harper", 
+  "Abigail", "Aaliyah", "Avery", "Evelyn", "Kaylee", "Ella", "Ellie", 
+  "Scarlett", "Arianna", "Hailey", "Nora", "Addison", "Brooklyn", 
+  "Hannah", "Mila", "Leah", "Elizabeth", "Sarah", "Eliana", "Mackenzie", 
+  "Peyton", "Maria", "Grace", "Adeline", "Elena", "Anna", "Victoria", 
+  "Camilla", "Lillian", "Natalie", "Jackson", "Aiden", "Lucas", 
+  "Liam", "Noah", "Ethan", "Mason", "Caden", "Oliver", "Elijah", 
+  "Grayson", "Jacob", "Michael", "Benjamin", "Carter", "James", 
+  "Jayden", "Logan", "Alexander", "Caleb", "Ryan", "Luke", "Daniel", 
+  "Jack", "William", "Owen", "Gabriel", "Matthew", "Connor", "Jayce", 
+  "Isaac", "Sebastian", "Henry", "Muhammad", "Cameron", "Wyatt", 
+  "Dylan", "Nathan", "Nicholas", "Julian", "Eli", "Levi", "Isaiah", 
+  "Landon", "David", "Christian", "Andrew", "Brayden", "John", 
+  "Lincoln"
+)
+
+rownames(X) = fake_first_names
+X
+```
+
+* Create a data frame of the same data as above except make the binary variable a factor "DOMESTIC" vs "FOREIGN" for 0 and 1 respectively. Print out the top few rows to check if this worked correctly.
+
+```{r}
+df = data.frame(X)
+df$X6 = factor(df$X6, levels = c(0, 1), labels = c("DOMESTIC", "FOREIGN"))
+df
+```
+
+* Print out a table of the binary variable. Then print out the proportions of "DOMESTIC" vs "FOREIGN".
+
+```{r}
+table(df$X6)
+table(df$X6)/n
+```
+Print out a summary of the whole dataframe.
+
+```{r}
+summary(df)
+```
+
+* Let `n = 50`. Create a n x n matrix `R` of exactly 50% entries 0's, 25% 1's 25% 2's. These values should be in random locations.
+
+```{r}
+n = 50
+R = matrix(sample(c(rep(0, (n^2)*.5), rep(1, (n^2)*.25), rep(2, (n^2)*.25))), nrow = n, ncol = n)
+```
+
+* Randomly punch holes (i.e. `NA`) values in this matrix so that an each entry is missing with probability 30%.
+
+```{r}
+for(i in 1 : n){
+  for(j in 1 : n) {
+    if(runif(1) <= 0.3) {
+      R[i, j] = NA
+    }
+  }
+}
+
+#Checker (DO NOT RUN THE CODE ABOVE TWICE): 
+sum(is.na(R)) / (n^2)
+```
+
+* Sort the rows in matrix `R` by the largest row sum to lowest. Be careful about the NA's!
+
+```{r}
+R = R[order(rowSums(R, na.rm = TRUE), decreasing = TRUE), ]
+
+#Test
+rowSums(R, na.rm = TRUE)
+```
+
+* We will now learn the `apply` function. This is a handy function that saves writing for loops which should be eschewed in R. Use the apply function to compute a vector whose entries are the standard deviation of each row. Use the apply function to compute a vector whose entries are the standard deviation of each column. Be careful about the NA's! This should be one line.
+
+```{r}
+apply(R, 1, sd, na.rm = TRUE)
+apply(R, 2, sd, na.rm = TRUE)
+```
+
+* Use the `apply` function to compute a vector whose entries are the count of entries that are 1 or 2 in each column. This should be one line.
+
+```{r}
+apply(R, 2, function(c) sum(!is.na(c) & c > 0))
+```
+
+* Use the `split` function to create a list whose keys are the column number and values are the vector of the columns. Look at the last example in the documentation `?split`.
+
+```{r}
+split(R, col(R, as.factor = TRUE))
+```
+
+* In one statement, use the `lapply` function to create a list whose keys are the column number and values are themselves a list with keys: "min" whose value is the minimum of the column, "max" whose value is the maximum of the column, "pct_missing" is the proportion of missingness in the column and "first_NA" whose value is the row number of the first time the NA appears.
+
+```{r}
+lapply(split(R, col(R)), function(c) { 
+  list("min" = min(c, na.rm = TRUE), 
+       "max" = max(c, na.rm = TRUE), 
+       "pct_missing" = sum(is.na(c)) / length(c), 
+       "first_NA" = which(is.na(c)) [1] )})
+```
+
+* Create a vector `v` consisting of a sample of 1,000 iid normal realizations with mean -10 and variance 100.
+
+```{r}
+v = rnorm(1000, mean = -10, sd = sqrt(100))
+v
+```
+
+
+* Create a function `my_reverse` which takes as required input a vector and returns the vector in reverse where the first entry is the last entry, etc. No function calls are allowed inside your function otherwise that would defeat the purpose of the exercise! (Yes, there is a base R function that does this called `rev`). Use `head` on `v` and `tail` on `my_reverse(v)` to verify it works.
+
+```{r}
+my_reverse = function(x){
+  y = x[length(x):1]
+  return(y)
+  }
+
+#Test
+head(v, 10)
+tail(my_reverse(v), 10)
+```
+
+
+* Create a function `flip_matrix` which takes as required input a matrix, an argument `dim_to_rev` that returns the matrix with the rows in reverse order or the columns in reverse order depending on the `dim_to_rev` argument. Let the default be the dimension of the matrix that is greater.
+
+```{r}
+flip_matrix = function(mat, dim_to_rev = NULL){
+  if(is.null(dim_to_rev)){
+    if(length(mat[1, ]) > length(mat[ , 1]))
+      mat[nrow(mat):1, ]
+    else
+      mat[ , ncol(mat):1]    
+  }
+  
+  else{
+    dim_to_rev = tolower(dim_to_rev)
+    if(dim_to_rev == "row" || dim_to_rev == "r")
+      mat[ , ncol(mat):1]
+    else if(dim_to_rev == "col" || dim_to_rev == "column" || dim_to_rev == "c" )
+      mat[nrow(mat):1, ]
+  }
+}
+
+#Test
+test_matrix = matrix(data = rnorm(15), nrow = 3, ncol = 5)
+test_matrix
+flip_matrix(test_matrix)
+```
+
+* Find the average of `v` and the standard error of `v`.
+
+```{r}
+mean(v, na.rm = TRUE)
+sd(v, na.rm = TRUE)
+```
+
+* Find the 5%ile of `v` and use the `qnorm` function to compute what it theoretically should be. Is the estimate about what is expected by theory?
+
+```{r}
+quantile(v, .05)
+qnorm(.05, mean = -10, sd = sqrt(100))
+```
+#The estimate is about the same as what is expected by theory. 
+
+* What is the percentile of `v` that corresponds to the value 0? What should it be theoretically? Is the estimate about what is expected by theory?
+
+```{r}
+quantile(v, 0)
+qnorm(0, mean = -10, sd = sqrt(100))
+```
+The value should be theoretically be negative infinity. The estimate gives -43.30308 which is not close to negative infinity. 
+
+* Create a list named `my_list` with keys "A", "B", ... where the entries are arrays of size 1, 2 x 2, 3 x 3 x 3, etc. Fill the array with the numbers 1, 2, 3, etc. Make 8 entries.
+
+
+```{r}
+my_list = list("A" = matrix(1, nrow=1, ncol=1), 
+               "B" = matrix(2, nrow=2, ncol=2), 
+               "C" = matrix(3, nrow=3, ncol=3), 
+               "D" = matrix(4, nrow=4, ncol=4), 
+               "E" = matrix(5, nrow=5, ncol=5), 
+               "F" = matrix(6, nrow=6, ncol=6), 
+               "G" = matrix(7, nrow=7, ncol=7),
+               "H" = matrix(8, nrow=8, ncol=8))
+```
+
+
+Run the following code:
+
+```{r}
+lapply(my_list, object.size)
+?object.size()
+```
+
+Use `?object.size` to read about what these functions do. Then explain the output you see above. For the later arrays, does it make sense given the dimensions of the arrays?
+
+The object.size function returns an estimate for the memory allocation of the parameter. It makes sense that the larger n x n arrays require more memory allocation compared to smaller sized arrays. 
+
+Now cleanup the namespace by deleting all stored objects and functions:
+
+```{r}
+rm(list = ls())
+```
+
+## A little about strings
+
+* Use the `strsplit` function and `sample` to put the sentences in the string `lorem` below in random order. You will also need to manipulate the output of `strsplit` which is a list. You may need to learn basic concepts of regular expressions.
+
+```{r}
+lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi posuere varius volutpat. Morbi faucibus ligula id massa ultricies viverra. Donec vehicula sagittis nisi non semper. Donec at tempor erat. Integer dapibus mi lectus, eu posuere arcu ultricies in. Cras suscipit id nibh lacinia elementum. Curabitur est augue, congue eget quam in, scelerisque semper magna. Aenean nulla ante, iaculis sed vehicula ac, finibus vel arcu. Mauris at sodales augue. "
+sample(unlist(strsplit(lorem,"\\.")))
+```
+
+
+
