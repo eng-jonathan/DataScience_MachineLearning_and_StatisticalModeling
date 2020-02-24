@@ -110,7 +110,6 @@ mode = function(x){
   y = unique(x)
   y[which.max(tabulate(match(x, y)))]
 }
-
 ```
 
 * Fit a threshold model to `y` using the feature `Sepal.Length`. Write your own code to do this. What is the estimated value of the threshold parameter? What is the total number of errors this model makes?
@@ -121,7 +120,8 @@ num_errors = array(NA, n)
 for (i in 1 : n) {
   y_hat = as.numeric(iris$Sepal.Length > iris$Sepal.Length[i])
   num_errors[i] = sum(y_hat != y)
-  }
+}
+
 threshold = iris$Sepal.Length[which.min(num_errors)] 
 
 g = function(x) {
@@ -129,7 +129,6 @@ g = function(x) {
   }
 
 sum(g(iris$Sepal.Length) != y)
-table(y)
 ```
 
 Does Robin's threshold model's performance make sense given the following summaries:
@@ -164,35 +163,42 @@ sum(g(iris$Sepal.Length) != y)
 You will code the "perceptron learning algorithm". Take a look at the comments above the function. This is standard "Roxygen" format for documentation. Hopefully, we will get to packages at some point and we will go over this again. It is your job also to fill in this documentation.
 
 ```{r}
-#' TO-DO: Provide a name for this function 
+#' TO-DO: perceptron_learning_algorithm
 #'
-#' TO-DO: Explain what this function does in a few sentences
+#' TO-DO: By taking in historial data to train and improve impon classification abilities, the algorithm is able to predict future values based on weights on factors learned from the training data.
 #'
 #' @param Xinput      Concatenated columms of a dataset
 #' @param y_binary    holds binary values 0 and 1
 #' @param MAX_ITER    Amount of runs for the perception function to adjust its values
-#' @param w           TO-DO: Explain this
+#' @param w           W defult filled with NULL as a bug checker
 #'
 #' @return            The computed final parameter (weight) as a vector of length p + 1
 #' @export            [In a package, this documentation parameter signifies this function becomes a public method. Leave this blank.]
 #'
-#' @author            [your name]
-perceptron_learning_algorithm = function(Xinput, y_binary, MAX_ITER = 10, w = NULL){
-
-  p = nrow(Xinput)
-  
-  w_vec = matrix(0, p+1)
-
+#' @author            [Jonathan Eng]
+perceptron_learning_algorithm = function(Xinput, y_binary, MAX_ITER = 100, w = NULL){
+  X = cbind(1, Xinput)
+  n = nrow(X)
+  p = ncol(X)
+  w = rep(0, p)
   for (iter in 1 : MAX_ITER){
+    is_error = FALSE
+    for(a in 1 : n){
+      x_a = X[a, ]
+      yhat_i = ifelse(sum(X[a, ] * w) > 0, 1, 0)
+
+      if(yhat_i == 0)
+        is_error = TRUE
+
       for (i in 1 : p){
-        x_i = Xinput[i, ]
-        yhat_i = ifelse(sum(x_i * w_vec) > 0, 1, 0)
-        y_i = y_binary[i]
-        w_vec[i] = w_vec[i] + (y_i - yhat_i) * x_i[1]
-        w_vec[i+1] = w_vec[i+1] + (y_i - yhat_i) * x_i[2]
+        y_i = y_binary[a]
+        w[i] = w[i] + (y_i - yhat_i) * x_a[i]
+      }
     }
+    if(is_error == FALSE)
+      return(w)
   }
-w_vec
+  w
 }
 ```
 
@@ -249,7 +255,7 @@ simple_viz_obj + simple_perceptron_line
 
 Explain this picture. Why is this line of separation not "satisfying" to you?
 
-TO-DO 
+The line separation is not satisfying because the line appeares to be closer to the reponse 0 red points than the response 1 blue points. Additionally, from looking at the graph it seems that a line with a diagonal negative slope woudl fit better compared to the current positive slope.
 
 For extra credit, program the maximum-margin hyperplane perceptron that provides the best linear discrimination model for linearly separable data. Make sure you provide ROxygen documentation for this function.
 
@@ -270,12 +276,11 @@ Use the `e1071` package to fit an SVM model to `y_binary` using the features in 
 
 ```{r}
 pacman::p_load(e1071)
-
 Xy_simple = data.frame(
  first_feature = c(1, 1, 2, 3, 3, 4),    #continuous
  second_feature = c(1, 2, 1, 3, 4, 3)    #continuous
 )
-?svm()
+
 svm_model = svm(X_simple_feature_matrix, y_binary, kernel = "linear", scale = FALSE)
 svm_model
 ```
@@ -296,7 +301,7 @@ simple_viz_obj + simple_perceptron_line + simple_svm_line
 
 Is this SVM line a better fit than the perceptron?
 
-This SVM line is a worse fit compared to the perceptron
+This SVM line is a worse fit compared to the perceptron. Had the svm line be pushed more towards the center it would be a better fit compared to the perceptron. 
 
 3. Now write pseuocode for your own implementation of the linear support vector machine algorithm using the Vapnik objective function we discussed.
 
@@ -387,4 +392,3 @@ For extra credit (unless you're a masters student), add an argument `k` to the `
 
 ```{r}
 #TO-DO --- extra credit for undergrads
-```
