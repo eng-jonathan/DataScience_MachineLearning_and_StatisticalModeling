@@ -23,4 +23,7 @@ Incorporated Topics
 * Linear algebra: Vectors, matrices, rank, transpose
 * Programming: basic data types, vectors, arrays, control flow (for, while, if, else), functions
 
-[Course Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
+Shortcuts:
+[Labs](https://github.com/eng-jonathan/QC_MATH_342/tree/master/labs)
+[Scanned Notes](https://github.com/eng-jonathan/QC_MATH_342/tree/master/scanned_classnotes)
+[Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
