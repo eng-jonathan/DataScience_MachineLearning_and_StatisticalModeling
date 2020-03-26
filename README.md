@@ -1,6 +1,7 @@
 # QC_MATH_342
 ## Queens College - Math 390.4/342W: Data Science via Machine Learning and Statistical Modeling 
 Shortcuts: 
+
 [Labs](https://github.com/eng-jonathan/QC_MATH_342/tree/master/labs) |
 [Scanned Notes](https://github.com/eng-jonathan/QC_MATH_342/tree/master/scanned_classnotes) |
 [Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
