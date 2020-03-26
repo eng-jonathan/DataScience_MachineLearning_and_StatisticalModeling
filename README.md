@@ -22,3 +22,5 @@ Incorporated Topics
 * Basic visualization of data: plots, histograms, bar charts
 * Linear algebra: Vectors, matrices, rank, transpose
 * Programming: basic data types, vectors, arrays, control flow (for, while, if, else), functions
+
+[Course Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
