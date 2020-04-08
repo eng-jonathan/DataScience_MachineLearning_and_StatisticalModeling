@@ -311,7 +311,11 @@ cppFunction('
 Time the difference in these functions for n = 100, 200, ...., 1500 while starting the sequence at the smallest possible floating point value in R. Store the results in a matrix.
 
 ```{r}
-#TO-DO
+n = seq(from = 100, to = 1500, by = 100)
+ntime = matrix(NA, nrow = length(n))
+for(i in n){
+  ntime[i] = system.time({fibcpp = nth_fibonacci_cpp(n, 1)})
+}
 ```
 
 Plot the divergence of performance (in log seconds) over n using a line geometry. Use two different colors for the R and CPP functions. Make sure there's a color legend on your plot.
