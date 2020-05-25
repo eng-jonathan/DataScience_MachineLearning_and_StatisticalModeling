@@ -3,6 +3,7 @@
 Shortcuts: 
 [Labs](https://github.com/eng-jonathan/QC_MATH_342/tree/master/labs) |
 [Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
+[Final Project](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
 
 Course Overview:
 * Philosophy of modeling and learning using data
