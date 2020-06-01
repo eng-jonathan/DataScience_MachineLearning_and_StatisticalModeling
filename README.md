@@ -3,6 +3,7 @@
 Shortcuts: 
 [Labs](https://github.com/eng-jonathan/QC_MATH_342/tree/master/labs) |
 [Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf) |
+[Modeling Essay](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)
 [Final Project](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
 
 Course Overview:
@@ -26,6 +27,10 @@ Incorporated Topics
 * Basic visualization of data: plots, histograms, bar charts
 * Linear algebra: Vectors, matrices, rank, transpose
 * Programming: basic data types, vectors, arrays, control flow (for, while, if, else), functions
+
+[Modeling Essay](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)
+* [Assignment](https://github.com/eng-jonathan/QC_MATH_342/blob/master/modeling_essay/modeling_essay%20_assignment.pdf) | [Essay](https://github.com/eng-jonathan/QC_MATH_342/blob/master/modeling_essay/modeling_essay.pdf)
+* It is your job to interpret the above prompts and redene them in your own words, i.e. you must limit, scope and concretize the above which are deliberately open-ended and nebulous. To argue your point, you will need to formulate a mathematical model with phenomenon(s) that can be measured (explain how) and characteristics of the units under consideration. You will need to clearly dene what models are, how your model is mathematical and discuss their limitations. In context of your prompt, you must appropriately explain the concepts we learned / will learn in class, including but not limited to t,f,g,h∗,δ,,e,t,z1,...,zt,D,H,A,n,p, x·1,...,x·p, x1·,...,xn·,X,y,Y, supervised learning, the delity of the measurement process, extrapolation, interpolation, stationarity, overtting, validation (in-sample vs. out-of-sample), model selection, machine learning, etc. 
 
 [Final Project](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project):
 * [Assignment](https://github.com/eng-jonathan/QC_MATH_342/blob/master/final_project/math3904_final_assignment.pdf) | [Report](https://github.com/eng-jonathan/QC_MATH_342/blob/master/final_project/math3904_finalprojectreport.pdf) | [R Code](https://github.com/eng-jonathan/QC_MATH_342/blob/master/final_project/math3904_finalproject.Rmd)
