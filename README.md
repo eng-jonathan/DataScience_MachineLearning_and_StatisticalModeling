@@ -19,7 +19,7 @@ Course Overview:
 * Correlation vs. causation, causal models, lurking variables and interpretations of linear model coefficients
 * Extrapolation
 * The R language will be taught formally from the ground and up as well as visualization using the ggplot library and manipulation using the dplyr and data.table libraries.
-___
+
 Incorporated Topics
 * Basic Probability Theory: axioms, conditional probability, in/dependence
 * Modeling with discrete random variables: Bernoulli, Hypergeometric, Binomial, Poisson, Geometric, Negative Binomial, Uniform Discrete and others
