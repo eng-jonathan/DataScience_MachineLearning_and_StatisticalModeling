@@ -5,7 +5,9 @@ Shortcuts:
 [Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf) |
 [Modeling Essay](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay) | 
 [Final Project](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
+ 
  – – – – -
+ 
 Course Overview:
 * Philosophy of modeling and learning using data
 * Prediction via the ordinary linear model including orthogonal projections, sum of squares identity, R2 and RMSE
