@@ -6,7 +6,7 @@ Shortcuts:
 [Modeling Essay](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay) | 
 [Final Project](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
  
- – – – – -
+______________________________________________________
  
 Course Overview:
 * Philosophy of modeling and learning using data
