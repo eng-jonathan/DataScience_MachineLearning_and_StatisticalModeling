@@ -178,62 +178,75 @@ X = na.omit(carData::GSSvocab)
 Create two different plots and identify the best-looking plot you can to examine the `age` variable. Save the best looking plot as an appropriately-named PDF.
 
 ```{r}
-#TO-DO
+ggplot(X, aes(x=age)) + geom_histogram(color="black", fill="white")
+
+ggsave("age_histogram.pdf")
+
+ggplot(X, aes(age, fill = educGroup)) + geom_density()
+ggsave("age.pdf")
 ```
 
 Create two different plots and identify the best looking plot you can to examine the `vocab` variable. Save the best looking plot as an appropriately-named PDF.
 
 ```{r}
-#TO-DO
+ggplot(X, aes(x=vocab)) + geom_histogram(color="black", fill="white")
+
+ggplot(X, aes(x=vocab,fill = educGroup)) + geom_density()
+ggsave("vocab.pdf")
 ```
 
 Create the best-looking plot you can to examine the `ageGroup` variable by `gender`. Does there appear to be an association? There are many ways to do this.
 
 ```{r}
-#TO-DO
+ggplot(X, aes(x=ageGroup,fill = gender)) + geom_density()
 ```
 
 Create the best-looking plot you can to examine the `vocab` variable by `age`. Does there appear to be an association?
 
 ```{r}
-#TO-DO
+ggplot(X, aes(x=age,y = vocab)) + geom_bar(stat="identity")
 ```
 
 Add an estimate of $f(x)$ using the smoothing geometry to the previous plot. Does there appear to be an association now?
 
 ```{r}
-#TO-DO
+ggplot(X, aes(age,vocab)) + geom_point() + geom_smooth() 
 ```
 
 Using the plot from the previous question, create the best looking overloading with variable `gender`. Does there appear to be an interaction of `gender` and `age`?
 
 ```{r}
-#TO-DO
+above = ggplot(X, aes(age,vocab)) + geom_point() + geom_smooth() 
+
+above + aes(col=gender)
 ```
 
 
 Using the plot from the previous question, create the best looking overloading with variable `nativeBorn`. Does there appear to be an interaction of `nativeBorn` and `age`?
 
 ```{r}
-#TO-DO
+above + aes(col=nativeBorn)
 ```
 
 Create two different plots and identify the best-looking plot you can to examine the `vocab` variable by `educGroup`. Does there appear to be an association?
 
 ```{r}
-#TO-DO
+ggplot(X, aes(x=vocab,fill = educGroup)) + geom_density()
 ```
 
 Using the best-looking plot from the previous question, create the best looking overloading with variable `gender`. Does there appear to be an interaction of `gender` and `educGroup`?
 
 ```{r}
-#TO-DO
+above1 = ggplot(X, aes(x=vocab,fill = educGroup)) + geom_density()
+
+above1 + aes(col=gender)
 ```
 
 Using facets, examine the relationship between `vocab` and `ageGroup`. You can drop year level `(Other)`. Are we getting dumber?
 
 ```{r}
-#TO-DO
+ggplot(X, aes(x=ageGroup,y = vocab)) + geom_bar(stat="identity")
+#About the Same
 ```
 
 We will now be getting some experience with speeding up R code using C++ via the `Rcpp` package.
@@ -241,13 +254,22 @@ We will now be getting some experience with speeding up R code using C++ via the
 First, clear the workspace and load the `Rcpp` package.
 
 ```{r}
-#TO-DO
+rm(list = ls())
+pacman::p_load(Rcpp)
 ```
 
 Create a variable `n` to be 10 and a vaiable `Nvec` to be 100 initially. Create a random vector via `rnorm` `Nvec` times and load it into a `Nvec` x `n` dimensional matrix.
 
 ```{r}
-#TO-DO
+n = 10
+Nvec = 100
+X = c()
+for (i in 1:n){
+  x = rnorm(Nvec)
+  X = cbind(X, x)
+}
+
+dim(X)
 ```
 
 Write a function `all_angles` that measures the angle between each of the pairs of vectors. You should measure the vector on a scale of 0 to 180 degrees with negative angles coerced to be positive.
@@ -270,26 +292,72 @@ Write an Rcpp function `all_angles_cpp` that does the same thing. Use an IDE if 
 
 Test the time difference between these functions for `n = 1000` and `Nvec = 100, 500, 1000, 5000`.  Store the results in a matrix.
 
-```{r}
-#TO-DO
+```{r echo=TRUE, results='hide'}
+n = 1000
+Nvec = c(100, 500, 1000, 5000)
+timer = c()
+timecpp = c()
+
+for (i in 1:length(Nvec)){
+  X = c()
+  for (j in 1:n){
+    x = rnorm(Nvec[i])
+    X = cbind(X, x)
+  }
+
+  timer = c(timer, unname(system.time( {
+    anglesr = all_angles(X, n) })) 
+    [3])
+}
 ```
 
 Plot the divergence of performance (in log seconds) over n using a line geometry. Use two different colors for the R and CPP functions. Make sure there's a color legend on your plot.
 
 ```{r}
-#TO-DO
+pacman::p_load(ggplot2)
+ggplot() +
+  geom_line(aes(y = Nvec, x = log(timer), col = "timer"))
 ```
 
 Let `Nvec = 10000` and vary `n` to be 10, 100, 1000. Plot the density of angles for all three values of `n` on one plot using color to signify `n`. Make sure you have a color legend. This is not easy.
 
 ```{r}
-#TO-DO
+Nvec = 10000
+X = c()
+for (i in 1:10){
+  x = rnorm(Nvec)
+  X = cbind(X, x)
+}
+ang1 = all_angles(X, 10)
+X = c()
+for (i in 1:100){
+  x = rnorm(Nvec)
+  X = cbind(X, x)
+}
+ang2 = all_angles(X, 100)
+X = c()
+for (i in 1:1000){
+  x = rnorm(Nvec)
+  X = cbind(X, x)
+}
+ang3 = all_angles(X, 1000)
+
+ggplot() + 
+  geom_density(aes(x = ang1, fill = "red"), alpha = .4) +
+  geom_density(aes(x = ang2, fill = "blue"), alpha = .4) +
+  geom_density(aes(x = ang3, fill = "green"), alpha = .4) +
+  scale_fill_discrete(labels = c("n=10", "n=100", "n=1000"))
 ```
 
 Write an R function `nth_fibonnaci` that finds the nth Fibonnaci number via recursion but allows you to specify the starting number. For instance, if the sequency started at 1, you get the familiar 1, 1, 2, 3, 5, etc. But if it started at 0.01, you would get 0.01, 0.01, 0.02, 0.03, 0.05, etc.
 
 ```{r}
-#TO-DO
+nth_fibonacci = function(n, start){
+  if (n == 1 | n == 2) return(start)
+  else return(nth_fibonacci(n-1, start) + nth_fibonacci(n-2, start))
+}
+
+#nth_fibonacci(5, 0.01)
 ```
 
 Write an Rcpp function `nth_fibonnaci_cpp` that does the same thing. Use an IDE if ou want, but write it below in-line.
@@ -321,5 +389,7 @@ for(i in n){
 Plot the divergence of performance (in log seconds) over n using a line geometry. Use two different colors for the R and CPP functions. Make sure there's a color legend on your plot.
 
 ```{r}
-#TO-DO
+ggplot() +
+  geom_line(aes(y = n, x = log(timer), col = "timer")) +
+  geom_line(aes(y = n, x = log(timecpp), col = "timecpp"))
 ```

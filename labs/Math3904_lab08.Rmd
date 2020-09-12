@@ -151,7 +151,11 @@ storms %>%
 For each storm, summarize its duration in number of hours (to the nearest 6hr increment).
 
 ```{r}
-#TO-DO
+storms %>% 
+  group_by(name) %>% 
+  summarise(duration = ifelse(sum(hour) %% 6 == 0, sum(hour), 
+                              ifelse(sum(hour) %% 6 < 3, sum(hour) - (sum(hour) %% 6), 
+                                     sum(hour) + (6-(sum(hour) %% 6)))))
 ```
 
 Convert year, month, day, hour into the variable `timestamp` using the `lubridate` package.
@@ -178,13 +182,21 @@ storms
 For each storm, summarize the day in which is started in the following format "Friday, June 27, 1975".
 
 ```{r}
-#TO-DO
+storms %>% 
+  group_by(name) %>% 
+  summarise(start_date = min(timestamp)) %>% 
+  mutate(start_date = paste(weekdays(start_date), 
+                            paste(months(start_date), day(start_date), sep = " "),
+                            year(start_date), sep = ", "))
 ```
 
 Create a new factor variable `decile_windspeed` by binning wind speed into 10 bins.
 
 ```{r}
-#TO-DO
+bins = 0:10
+
+storms %<>% 
+  mutate(decile_windspeed = factor(cut(wind, breaks = quantile(wind, bins/10), labels = FALSE)))
 ```
 
 Create a new data frame `serious_storms` which are category 3 and above hurricanes.
@@ -255,31 +267,39 @@ storms %>%
 For each storm observation, use the function from the previous question to calculate the distance it moved since the previous observation.
 
 ```{r}
-#TO-DO
+storms %<>% 
+  mutate(dist_from_prev = ifelse(name != lag(name), 0, d_coords(lat, long, lag(lat), lag(long)))) %>% 
+  mutate(dist_from_prev = ifelse(is.na(dist_from_prev), 0, dist_from_prev))
 ```
 
 For each storm, find the total distance it moved over its observations and its total displacement. "Distance" is a scalar quantity that refers to "how much ground an object has covered" during its motion. "Displacement" is a vector quantity that refers to "how far out of place an object is"; it is the object's overall change in position.
 
 ```{r}
-#TO-DO
+storms %>% 
+  group_by(name) %>% 
+  summarise(Distance = sum(dist_from_prev),
+            Displacement = paste(round(last(lat) - first(lat), 2), round(last(long) - first(long), 2), sep = " / "))
 ```
 
 For each storm observation, calculate the average speed the storm moved in location.
 
 ```{r}
-#TO-DO
+storms %<>% 
+  mutate(speed = dist_from_prev / 6)
 ```
 
 For each storm, calculate its average ground speed (how fast its eye is moving which is different from windspeed around the eye).
 
 ```{r}
-#TO-DO
+storms %>% 
+  group_by(name) %>% 
+  summarise(avg_ground_speed = mean(speed))
 ```
 
 Is there a relationship between average ground speed and maximum category attained? Use a dataframe summary (not a regression).
 
 ```{r}
-#TO-DO
+cor(as.numeric(storms$category), storms$speed)
 ```
 
 Now we want to transition to building real design matrices for prediction. This is more in tune with what happens in the real world. Large data dump and you convert it into $X$ and $y$ how you see fit.
@@ -287,12 +307,40 @@ Now we want to transition to building real design matrices for prediction. This 
 Suppose we wish to predict the following: given the first three readings of a storm, can you predict its maximum wind speed? Identify the `y` and identify which features you need $x_1, ... x_p$ and build that matrix with `dplyr` functions. This is not easy, but it is what it's all about. Feel free to "featurize" as creatively as you would like. You aren't going to overfit if you only build a few features relative to the total 198 storms.
 
 ```{r}
-#TO-DO
+storms_m = storms %>% 
+  group_by(name) %>% 
+  summarise(y = max(wind),
+            avg_pressure = mean(pressure),
+            avg_distance = mean(dist_from_prev),
+            final_status = last(status)) %>% 
+  select(-name)
 ```
 
 Fit your model. Validate it. Assess your level of success at this endeavor.
  
 ```{r}
+mod = lm(y ~ 0 + ., data = storms_m)
+summary(mod)
+
+n = nrow(storms_m)
+K = 5
+test_indices = sample(1 : n, 1 / K * n)
+train_indices = setdiff(1 : n, test_indices)
+
+X = select(storms_m, -y)
+y = storms_m$y
+
+X_train = X[train_indices, ]
+y_train = y[train_indices]
+X_test = X[test_indices, ]
+y_test = y[test_indices]
+
+modv = lm(y_train ~ ., data.frame(X_train))
+yhat_oos = predict(mod, data.frame(X_test))
+oos_residuals = y_test - yhat_oos
+
+sd(modv$residuals) - sd(oos_residuals)
+head(cbind(y_test, yhat_oos))
 ```
 
 
@@ -352,5 +400,9 @@ summary(modv)$sigma
 Use 5-fold CV to estimate the generalization error of the model with all interactions.
 
 ```{r}
-#TO-DO
+pacman::p_load(caret)
+cv <- trainControl(method = "cv", number = 5)
+mod <- train(medv ~ .*., data = Boston, method = "lm",
+               trControl = cv)
+print(mod)
 ```

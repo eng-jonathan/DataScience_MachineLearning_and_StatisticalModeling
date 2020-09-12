@@ -152,19 +152,42 @@ in_sample = -(ytrain - phat_train)**2
 Print out the coefficients of the model selection procedure's guess as to the locally optimal probability estimation model and interpret the five largest (in abolute value) coefficients. Do the signs make sense on these coefficients?
 
 ```{r}
-#TO-DO
+p_optimal = which.max(oos_brier_by_iteration)
+
+optimal_model = glm(ytrain ~ ., Xmm_train[predictor_by_iteration[1:p_optimal]], family = "binomial") 
+
+five_largest = sort(abs(optimal_model$coefficients), decreasing = TRUE)[1:5]
+
+five_largest_coef = c()
+for (i in 1:(p_optimal + 1)) {
+  for (j in 1:5){
+    if (abs(optimal_model$coefficients[i]) == five_largest[j]){
+      five_largest_coef = c(five_largest_coef, optimal_model$coefficients[i])
+    }
+  }
+}
+five_largest_coef
+
 ```
 
 Use this locally optimal probability estimation model to make predictions in all three data sets: train, select test. Compare to the Brier scores across all three sets. Is this expected?
 
 ```{r}
-#TO-DO
+phatTrain = predict(optimal_model, Xmm_train[predictor_by_iteration[1:p_optimal]], type = 'response')
+mean(-(ytrain - phatTrain)**2) 
+
+phatSelect = predict(optimal_model, Xmm_select[predictor_by_iteration[1:p_optimal]], type = 'response')
+mean(-(yselect - phatSelect)**2) 
+
+phatTest = predict(optimal_model, Xmm_test[predictor_by_iteration[1:p_optimal]], type = 'response')
+mean(-(ytest - phatTest)**2) 
 ```
 
 Plot the probability predictions in the test set by `y`. Does this plot look good?
 
 ```{r}
-#TO-DO
+ggplot() +
+  geom_boxplot(aes(x = factor(ytest), y = phatTest)) 
 ```
 
 Calculate misclassification error, sensitivity (recall), specificity (true negative rate, TN / N), FDR, FOR for this model if you threshold at phat = 0.5. Interpret these metrics.
@@ -237,11 +260,21 @@ storms_obs_ts_hu
 Create a data frame in long format with columns "diameter" for the measurement and "diameter_type" which will be categorical taking on the values "hu" or "ts".
 
 ```{r}
-#TO-DO
+storms_long = storms %>% 
+  gather(diameter_type, diameter, ts_diameter:hu_diameter) %>% 
+  mutate(diameter_type = ifelse(diameter_type == "ts_diameter", "ts", "hu"))
 ```
 
 Using this long-formatted data frame, use a line plot to illustrate both "ts_diameter" and "hu_diameter" metrics by observation period for four random storms using a 2x2 faceting. The two diameters should appear in two different colors and there should be an appropriate legend.
 
 ```{r}
-#TO-DO
+random_storms = sample(storms$name, 4)
+
+storms_long %>% 
+  filter(name %in% random_storms) %>% 
+  ggplot() +
+  geom_line(aes(x = obs_period, y = diameter, color = diameter_type)) +
+  facet_wrap(vars(name)) +
+  xlab("Observation Period") +
+  ylab("Diameter")
 ```
