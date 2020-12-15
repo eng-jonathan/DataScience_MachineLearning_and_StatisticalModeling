@@ -38,7 +38,7 @@ ___
 * Uses Supervised Machine Learning to beat Zillow.com’s “zestimates” due to its inaccuracy on Queens
 apartment predictions. It’s developed in R and incorporates data manipulation techniques such as data
 removal, munging, and imputation, and linear and forest regressions.
-* Example(s)
+* Highlight(s)
 
 Random Forest Regression Trees
 
