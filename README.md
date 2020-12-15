@@ -39,4 +39,5 @@ ___
 apartment predictions. It’s developed in R and incorporates data manipulation techniques such as data
 removal, munging, and imputation, and linear and forest regressions.
 * Highlight(s)
-![Random Forest Regression](images/final_project_randomforest_output.png)
+Random Forest Regression Trees
+![](images/final_project_randomforest_output.png)
