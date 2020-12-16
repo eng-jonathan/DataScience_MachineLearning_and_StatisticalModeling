@@ -1,5 +1,5 @@
 # Data Science via Machine Learning and Statistical Modeling 
-[Marriage Model](#marriage) | 
+[Mathematical Marriage Model](#marriage) | 
 [Queens Apartment Price Predictions](#prediction)|
 [Course Overview](#overview)
 ___
