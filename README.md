@@ -12,6 +12,34 @@ ___
 ### [Can you beat Zillow at Predicting Apartment Prices in Queens?](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/tree/master/final_project)
 * [Prompt](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject_prompt.pdf) | [Report](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.pdf) | [R Code](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.Rmd)
 * Uses Supervised Machine Learning to beat *Zillow.com’s “zestimates”* due to its inaccuracy on Queens apartment predictions. It’s developed in *R* and incorporates data manipulation techniques such as data removal, munging, and imputation, and linear and forest regressions.
+* Highlights
+```
+#Split Data into Test and Train Indices
+prop_test = 0.2
+test_indices = sample(1 : nrow(newdata), round(prop_test * nrow(newdata)))
+test_indices = sample(1 : nrow(newdata), round(prop_test * nrow(newdata)))
+newdata_test = newdata[test_indices, ]
+y_test = newdata_test[ ,1]
+X_test = newdata_test[ ,2:ncol(newdata_test)]
+train_indices = setdiff(1 : nrow(newdata), test_indices)
+newdata_train = newdata[train_indices, ]
+y_train = newdata_train[ ,1]
+X_train = newdata_train[ ,2:ncol(newdata_train)]
+```
+
+```{r, warning = FALSE}
+#Bagging and Regression Trees (Random Forest)
+num_trees = 500
+optimal_mtry = tuneRF(X, y, mtryStart = 1, ntreeTry = num_trees, stepFactor =  2, plot = FALSE, doBest = FALSE)
+mod_bag = YARF(X_test, y_test, num_trees = num_trees, calculate_oob_error = FALSE, mtry = optimal_mtry[nrow(optimal_mtry)]) 
+mod_rf = YARF(X_test, y_test, num_trees = num_trees, calculate_oob_error = FALSE, mtry = optimal_mtry[nrow(optimal_mtry)])
+YARF_update_with_oob_results(mod_bag)
+YARF_update_with_oob_results(mod_rf)
+rmse_bag = sd(y_test - predict(mod_bag, data.frame(X_test)))
+rmse_rf = sd(y_test - predict(mod_rf, (X_test)))
+cat("\nrmse_bag:", rmse_bag, "\nrmse_rf:", rmse_rf, "\n\ngain:", (rmse_bag - rmse_rf) / rmse_bag * 100, "%\n")
+```
+
 ___ 
 ### Course Overview:
 * Philosophy of modeling and learning using data
