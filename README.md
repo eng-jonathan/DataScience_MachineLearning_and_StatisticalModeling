@@ -1,19 +1,19 @@
 # Data Science via Machine Learning and Statistical Modeling 
-[Labs](https://github.com/eng-jonathan/QC_MATH_342/tree/master/labs) |
-[Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf) |
-[Marriage Model](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay) | 
-[Queens Apartment Price Predictions](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
- 
+[Course Overview](#overview) |
+[Marriage Model](#marriage) | 
+[Queens Apartment Price Predictions](#prediction)
+
 ___
-### [Mathematical Model on Marriage Success](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)
+### [Mathematical Model on Marriage Success](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)<a name="marriage"></a>
 * [Prompt](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/modeling_essay/modeling_essay%20_prompt.pdf) | [Essay](https://github.com/eng-jonathan/QC_MATH_342/blob/master/modeling_essay/modeling_essay.pdf)
 * Creates a mathematical model to explain what makes a success marriage will never be understood. It incorporates feature selection, data training methods, and possible output errors. 
 ___
-### [Can you beat Zillow at Predicting Apartment Prices in Queens?](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/tree/master/final_project)
+### [Can you beat Zillow at Predicting Apartment Prices in Queens?](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/tree/master/final_project)<a name="prediction"></a>
 * [Prompt](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject_prompt.pdf) | [Report](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.pdf) | [R Code](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.Rmd)
 * Uses Supervised Machine Learning to beat *Zillow.com’s “zestimates”* due to its inaccuracy on Queens apartment predictions. It’s developed in *R* and incorporates data manipulation techniques such as data removal, munging, and imputation, and linear and forest regressions.
 ___ 
-### Course Overview:
+### Course Overview:<a name="overview"></a>
+[Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
 * Philosophy of modeling and learning using data
 * Prediction via the ordinary linear model including orthogonal projections, sum of squares identity, R2 and RMSE
 * Polynomial and interaction regressions
