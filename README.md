@@ -1,8 +1,7 @@
 # Data Science via Machine Learning and Statistical Modeling 
-[Course Overview](#overview) |
 [Marriage Model](#marriage) | 
-[Queens Apartment Price Predictions](#prediction)
-
+[Queens Apartment Price Predictions](#prediction)|
+[Course Overview](#overview)
 ___
 ### [Mathematical Model on Marriage Success](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)<a name="marriage"></a>
 * [Prompt](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/modeling_essay/modeling_essay%20_prompt.pdf) | [Essay](https://github.com/eng-jonathan/QC_MATH_342/blob/master/modeling_essay/modeling_essay.pdf)
