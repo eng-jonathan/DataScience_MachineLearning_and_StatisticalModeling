@@ -1,4 +1,4 @@
-# Data Science via Machine Learning and Statistical Modeling 
+# Data Science via Machine Learning and Statistical Modeling<a name="TOP"></a>
 [Mathematical Marriage Model](#marriage) | 
 [Queens Apartment Price Predictions](#prediction)|
 [Course Overview](#overview)
@@ -34,4 +34,4 @@ ___
 * Linear algebra: Vectors, matrices, rank, transpose
 * Programming: basic data types, vectors, arrays, control flow (for, while, if, else), functions
 ___
-
+[Return to Top](#TOP)
