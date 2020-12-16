@@ -2,8 +2,8 @@
 Shortcuts: 
 [Labs](https://github.com/eng-jonathan/QC_MATH_342/tree/master/labs) |
 [Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf) |
-[Modeling Essay](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay) | 
-[Final Project](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
+[Marriage Model](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay) | 
+[Queens Apartment Price Predictions](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
  
 ___
 [Mathematical Model on Marriage Success](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)
