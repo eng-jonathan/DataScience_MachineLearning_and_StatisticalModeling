@@ -1,5 +1,4 @@
 ## Data Science via Machine Learning and Statistical Modeling 
-Shortcuts: 
 [Labs](https://github.com/eng-jonathan/QC_MATH_342/tree/master/labs) |
 [Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf) |
 [Marriage Model](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay) | 
