@@ -6,11 +6,11 @@ Shortcuts:
 [Final Project](https://github.com/eng-jonathan/QC_MATH_342/tree/master/final_project)
  
 ___
-[Modeling Essay](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)
+[Mathematical Model on Marriage](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)
 * [Assignment](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/modeling_essay/modeling_essay%20_prompt.pdf) | [Essay](https://github.com/eng-jonathan/QC_MATH_342/blob/master/modeling_essay/modeling_essay.pdf)
 * Creates a mathematical model to explain what makes a success marriage will never be understood. It incorporates feature selection, data training methods, and possible output errors. 
 ___
-[Final Project](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/tree/master/final_project)
+[Can you beat Zillow at Predicting Apartment Prices in Queens?](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/tree/master/final_project)
 * [Assignment](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject_prompt.pdf) | [Report](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.pdf) | [R Code](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.Rmd)
 * Uses Supervised Machine Learning to beat Zillow.com’s “zestimates” due to its inaccuracy on Queens
 apartment predictions. It’s developed in R and incorporates data manipulation techniques such as data
