@@ -11,9 +11,7 @@ ___
 ___
 ### [Can you beat Zillow at Predicting Apartment Prices in Queens?](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/tree/master/final_project)
 * [Prompt](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject_prompt.pdf) | [Report](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.pdf) | [R Code](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.Rmd)
-* Uses Supervised Machine Learning to beat Zillow.com’s “zestimates” due to its inaccuracy on Queens
-apartment predictions. It’s developed in R and incorporates data manipulation techniques such as data
-removal, munging, and imputation, and linear and forest regressions.
+* Uses Supervised Machine Learning to beat *Zillow.com’s “zestimates”* due to its inaccuracy on Queens apartment predictions. It’s developed in *R* and incorporates data manipulation techniques such as data removal, munging, and imputation, and linear and forest regressions.
 ___ 
 ### Course Overview:
 * Philosophy of modeling and learning using data
