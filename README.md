@@ -44,4 +44,3 @@ ___
 * Linear algebra: Vectors, matrices, rank, transpose
 * Programming: basic data types, vectors, arrays, control flow (for, while, if, else), functions
 ___
-[Return to Top](#TOP)
