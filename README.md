@@ -16,7 +16,7 @@ ___
 * Developed in ***R*** and incorporates data modeling and manipulation techniques such as data removal, munging, and imputation, and linear and forest regressions
 
 **Results**:
-* Prediction Ability: Random Forest Model is accurate within $27,000. (Fair Range considering the Average Home Price is $315,000)
+* Accuracy: Random Forest Model is accurate within $27,000. (Fair Range considering the Average Home Price is $315,000)
 * Problems: Model Requires more observations to accurately predict extrapolated data, however performs well when predicting within the included zipcodes.
 ___ 
 <a name="overview"></a>
