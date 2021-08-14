@@ -3,7 +3,7 @@
 * Uses ***Supervised Machine Learning*** to beat *Zillow.com’s “zestimates”*
 * Developed in ***R*** and incorporates data modeling and manipulation techniques such as data removal, munging, and imputation, and linear and forest regressions
 
-**Results**:
+## Results
 
 ✓ Random Forest Model predicts within $27,000. (The Average Home Price is $315,000)
 
