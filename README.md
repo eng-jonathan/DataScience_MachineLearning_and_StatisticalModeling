@@ -17,9 +17,9 @@ ___
 
 **Results**:
 
-✓ Random Forest Model is accurate within $27,000. (Fair Range considering the Average Home Price is $315,000)
+✓ Random Forest Model predicts within $27,000. (The Average Home Price is $315,000)
 
-✗ Model Requires more observations to accurately predict extrapolated data, however performs well when predicting within the included zipcodes.
+✗ Model Requires more observations to accurately predict extrapolated data, however performs well within the included zipcodes.
 ___ 
 <a name="overview"></a>
 
