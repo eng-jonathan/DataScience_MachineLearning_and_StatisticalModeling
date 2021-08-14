@@ -1,9 +1,6 @@
 <a name="TOP"></a>
 
 # Data Science via Machine Learning and Statistical Modeling
-[Mathematical Marriage Model](#marriage) | 
-[Predicting Apartment Prices in Queens](#prediction)|
-[Course Overview](#overview)
 ___
 <a name="marriage"></a>
 
