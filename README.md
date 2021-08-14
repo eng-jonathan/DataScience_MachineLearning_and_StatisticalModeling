@@ -1,28 +1,30 @@
 <a name="TOP"></a>
 
 # Data Science via Machine Learning and Statistical Modeling
-[Mathematical Marriage Model](#marriage) | 
-[Queens Apartment Price Predictions](#prediction)|
-[Course Overview](#overview)
 ___
 <a name="marriage"></a>
 
 ### [Mathematical Model on Marriage Success](https://github.com/eng-jonathan/QC_MATH_342/tree/master/modeling_essay)
 * [Prompt](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/modeling_essay/modeling_essay%20_prompt.pdf) | [Report](https://github.com/eng-jonathan/QC_MATH_342/blob/master/modeling_essay/modeling_essay.pdf)
-* Creates a mathematical model to explain what makes a success marriage will never be understood. It incorporates feature selection, data training methods, and possible output errors. 
+* Creates a mathematical model to explain what makes a success marriage can never be understood. It incorporates feature selection, data training methods, and possible output errors. 
 ___
 <a name="prediction"></a>
 
 ### [Predicting Apartment Prices in Queens](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/tree/master/final_project)
 * [Prompt](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject_prompt.pdf) | [Report](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.pdf) | [R Code](https://github.com/eng-jonathan/QC_MATH_342_DataScience_via_MachineLearning_and_StatisticalModeling/blob/master/final_project/math3904_finalproject.Rmd)
 * Uses ***Supervised Machine Learning*** to beat *Zillow.com’s “zestimates”*
-* Developed in ***R*** and incorporates data modeling, and manipulation techniques such as data removal, munging, and
-imputation, and linear and forest regressions 
+* Developed in ***R*** and incorporates data modeling and manipulation techniques such as data removal, munging, and imputation, and linear and forest regressions
+
+**Results**:
+
+✓ Random Forest Model predicts within $27,000. (The Average Home Price is $315,000)
+
+✗ Model Requires more observations to accurately predict extrapolated data, however performs well within the included zipcodes.
 ___ 
 <a name="overview"></a>
 
 ### Course Overview:
-[Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
+* [Syllabus](https://github.com/eng-jonathan/QC_MATH_342/blob/master/syllabus/syllabus_math342.pdf)
 * Philosophy of modeling and learning using data
 * Prediction via the ordinary linear model including orthogonal projections, sum of squares identity, R2 and RMSE
 * Polynomial and interaction regressions
